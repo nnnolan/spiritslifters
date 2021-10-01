@@ -1,0 +1,41 @@
+function onOpen() {
+  const ui = SpreadsheetApp.getUi();
+  const menu = ui.createMenu('Autofill Docs');
+  menu.addItem('Create New Docs', 'createNewGoogleDocs');
+  menu.addToUi();
+
+}
+
+function createNewGoogleDocs() {
+  
+  const googleDocTemplate = DriveApp.getFileById('1JZkFKAfUs9LjTsoEDWoS26PP__W1Mn0bUGM_Ngi_uTg');
+  const destinationFolder = DriveApp.getFolderById('18LfHMA5g9cP4h7lRN18iQx6QDyKboEiI');
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Form Responses');
+  const rows = sheet.getDataRange().getValues();
+  
+  rows.forEach(function(row, index){
+    if (index === 0) return;
+    if (row[28]) return;'
+    //change rows to match our template
+    const copy = googleDocTemplate.makeCopy(`${row[1]}, ${row[2]} Contract ` , destinationFolder);
+    const doc = DocumentApp.openById(copy.getId());
+    const body = doc.getBody();
+    const friendlyDate = new Date(row[4]).toLocaleDateString(); //change row , completed, changed from 3
+    
+    body.replaceText('{{Applicant Name}}', row[1]); 
+    body.replaceText('{{Email}} ', row[2]);  
+    body.replaceText('{{Phone Number}}', row[3]); 
+    body.replaceText('{{Event Date}}', row[friendlyDate]);  //row 4 changed to friendly date
+    body.replaceText('{{Event Time}} ', row[5]);  
+    body.replaceText('{{Event Type}}', row[6]); 
+    body.replaceText('{{Rental Fee}', row[7]); 
+    body.replaceText('{{Hourly Rent Fee}} ', row[8]);  
+    body.replaceText('{{Guest Estimate}}', row[9]); 
+    body.replaceText('{{Maximum Guest Estimate}}', row[10]); 
+    body.replaceText('{{Usage Start}} ', row[11]);  
+    body.replaceText('{{Usage Finish}}', row[12]); 
+    
+     
+    
+  })
+}
