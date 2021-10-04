@@ -1,2 +1,2 @@
 # spiritslifters
-html/css/js redesign 
+js sheet redeux
