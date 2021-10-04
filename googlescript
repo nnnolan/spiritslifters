@@ -10,7 +10,7 @@ function createNewGoogleDocs() {
   
   const googleDocTemplate = DriveApp.getFileById('1JZkFKAfUs9LjTsoEDWoS26PP__W1Mn0bUGM_Ngi_uTg');
   const destinationFolder = DriveApp.getFolderById('18LfHMA5g9cP4h7lRN18iQx6QDyKboEiI');
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Form Responses');
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Form Responses 1'); //change from get name to get id 
   const rows = sheet.getDataRange().getValues();
   
   rows.forEach(function(row, index){
@@ -27,7 +27,7 @@ function createNewGoogleDocs() {
     body.replaceText('{{Applicant Name}}', row[1]); 
     body.replaceText('{{Email}} ', row[2]);  
     body.replaceText('{{Phone Number}}', row[3]); 
-    body.replaceText('{{Event Date}}', row[friendlyDate]);  //row 4 changed to friendly date
+    body.replaceText('{{Event Date}}', row[4]);  //row 4 changed to friendly date , removed 10/04 
     body.replaceText('{{Event Time}} ', row[5]);  
     body.replaceText('{{Event Type}}', row[6]); 
     body.replaceText('{{Rental Fee}', row[7]); 
