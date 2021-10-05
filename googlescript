@@ -14,22 +14,22 @@ function createNewGoogleDocs() {
   const rows = sheet.getDataRange().getValues();
   
   rows.forEach(function(row, index){
+    const friendlyDate = new Date(row[4]).toLocaleDateString(); //change row , completed, changed from 3
+    const friendlyDate2 = new Date(row[27]).toLocaleDateString(); 
     if (index === 0) return;
     if (row[30]) return;
     //change rows to match our template
-    const copy = googleDocTemplate.makeCopy(`${row[1]} ${row[4]}`, destinationFolder); //bugged name 
+    const copy = googleDocTemplate.makeCopy(`${row[1]} ${friendlyDate}`, destinationFolder); //bugged name 
     //Exception: The parameters (String,String,DriveApp.Folder) don't match the method signature for DriveApp.File.makeCopy.
-    //FINISHED
     //May be able to fix by making it all with one comma. Ex: (`${row[1]} ${row[4]}`, destinationFolder)
 
     const doc = DocumentApp.openById(copy.getId());
     const body = doc.getBody();
-    const friendlyDate = new Date(row[4]).toLocaleDateString(); //change row , completed, changed from 3
     
     body.replaceText('{{Applicant Name}}', row[1]); 
     body.replaceText('{{Email}}', row[2]);
     body.replaceText('{{Phone Number}', row[3]);
-    body.replaceText('{{Event Date}}', row[4]);
+    body.replaceText('{{Event Date}}', friendlyDate);
     body.replaceText('{{Event Time}}', row[5]);
     body.replaceText('{{Event Type}}', row[6]);
     body.replaceText('{{Rental Fee}}', row[7]);
@@ -53,15 +53,14 @@ function createNewGoogleDocs() {
     body.replaceText('{{CCFEE}}', row[24]);
     body.replaceText('{{total}}', row[25]);
     body.replaceText('{{Deposit}}', row[26]);
-    body.replaceText('{{FinalPay}}', row[27]);
+    body.replaceText('{{FinalPay}}', friendlyDate2);
     
     
     
     
                      
                    
-    //FINISHED
-    //rental hours, usage start, drink package, bartender fee, av fee, doc, flip, misc cost, misc, subtotal, sales tax, cc fee, total, deposit, final payment 
+    //rental hours, usage start, drink package, bartender fee, av fee, doc, flip, misc cost, misc, subtotal, sales tax, cc fee, total, deposit, final payment
     doc.saveAndClose();
     const url = doc.getUrl();
     sheet.getRange(index + 1, 31).setValue(url)
