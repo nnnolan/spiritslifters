@@ -1,0 +1,17 @@
+// calendar 
+
+function createCalendarEvent() {
+  let liftedSpiritsCalendar = CalendarApp.getCalendarById("c_s7fher90p6vbo2p967evvspu78@group.calendar.google.com");
+  let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Form Responses 2');
+  
+  let schedule = sheet.getDataRange().getValues();
+  schedule.splice(0, 2);
+  
+  schedule.forEach(function(entry) { //deposit paid date
+    liftedSpiritsCalendar.createAllDayEvent([1], [27])//title, date
+    
+  schedule.forEach(function(entry) { //final payment date
+    liftedSpiritsCalendar.createAllDayEvent([1], [28])//title, date
+
+  })
+} 
