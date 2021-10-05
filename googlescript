@@ -43,9 +43,8 @@ function createNewGoogleDocs() {
     body.replaceText('{{DrinkPackage}}', row[15]);
     body.replaceText('{{BartenderFee}}', row[16]);
     body.replaceText('{{AVFee}}', row[17]);
-    //body.replaceText('{{DOC}}', row[18]); ???? not on google form, doc 
+    body.replaceText('{{DOC}}', row[18]);
     body.replaceText('{{flip}}', row[19]);
-    //body.replacetext('{{sum grat}}' [row18]); sum grat not on duc
     body.replaceText('{{Misc}}', row[20]);
     body.replaceText('{{Misc Cost}}', row[21]);
     body.replaceText('{{Subtotal}}', row[22]);
