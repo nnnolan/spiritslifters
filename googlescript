@@ -10,36 +10,61 @@ function createNewGoogleDocs() {
   
   const googleDocTemplate = DriveApp.getFileById('1JZkFKAfUs9LjTsoEDWoS26PP__W1Mn0bUGM_Ngi_uTg');
   const destinationFolder = DriveApp.getFolderById('18LfHMA5g9cP4h7lRN18iQx6QDyKboEiI');
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Form Responses 1'); //change from get name to get id 
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Form Responses 2');
   const rows = sheet.getDataRange().getValues();
   
   rows.forEach(function(row, index){
     if (index === 0) return;
-    if (row[27]) return;
+    if (row[30]) return;
     //change rows to match our template
-    const copy = googleDocTemplate.makeCopy('test', destinationFolder); //bugged name 
+    const copy = googleDocTemplate.makeCopy(`${row[1]} ${row[4]}`, destinationFolder); //bugged name 
     //Exception: The parameters (String,String,DriveApp.Folder) don't match the method signature for DriveApp.File.makeCopy.
+    //FINISHED
+    //May be able to fix by making it all with one comma. Ex: (`${row[1]} ${row[4]}`, destinationFolder)
 
     const doc = DocumentApp.openById(copy.getId());
     const body = doc.getBody();
     const friendlyDate = new Date(row[4]).toLocaleDateString(); //change row , completed, changed from 3
     
     body.replaceText('{{Applicant Name}}', row[1]); 
-    body.replaceText('{{Email}} ', row[2]);  
-    body.replaceText('{{Phone Number}}', row[3]); 
-    body.replaceText('{{Event Date}}', row[4]);  //row 4 changed to friendly date , removed 10/04 
-    body.replaceText('{{Event Time}} ', row[5]);  
-    body.replaceText('{{Event Type}}', row[6]); 
-    body.replaceText('{{Rental Fee}', row[7]); 
-    body.replaceText('{{Hourly Rent Fee}} ', row[8]);  
-    body.replaceText('{{Guest Estimate}}', row[9]); 
-    body.replaceText('{{Maximum Guest Estimate}}', row[10]); 
-    body.replaceText('{{Usage Start}} ', row[11]);  
-    body.replaceText('{{Usage Finish}}', row[12]); 
+    body.replaceText('{{Email}}', row[2]);
+    body.replaceText('{{Phone Number}', row[3]);
+    body.replaceText('{{Event Date}}', row[4]);
+    body.replaceText('{{Event Time}}', row[5]);
+    body.replaceText('{{Event Type}}', row[6]);
+    body.replaceText('{{Rental Fee}}', row[7]);
+    body.replaceText('{{Hourly Rent Fee}}', row[8]);
+    body.replaceText('{{rentalhours}}', row[9]);
+    body.replaceText('{{Guest Estimate}}', row[10]);
+    body.replaceText('{{Maximum Guest Estimate}}', row[11]);
+    body.replaceText('{{Usage Start}}', row[12]);
+    body.replaceText('{{Usage Finish}}', row[13]);
+    body.replaceText('{{Rental Fee}}', row[14]);
+    body.replaceText('{{DrinkPackage}}', row[15]);
+    body.replaceText('{{BartenderFee}}', row[16]);
+    body.replaceText('{{AVFee}}', row[17]);
+    //body.replaceText('{{DOC}}', row[18]); ???? not on google form, doc 
+    body.replaceText('{{flip}}', row[19]);
+    //body.replacetext('{{sum grat}}' [row18]); sum grat not on duc
+    body.replaceText('{{Misc}}', row[20]);
+    body.replaceText('{{Misc Cost}}', row[21]);
+    body.replaceText('{{Subtotal}}', row[22]);
+    body.replaceText('{{salestax}}', row[23]);
+    body.replaceText('{{CCFEE}}', row[24]);
+    body.replaceText('{{total}}', row[25]);
+    body.replaceText('{{Deposit}}', row[26]);
+    body.replaceText('{{FinalPay}}', row[27]);
     
+    
+    
+    
+                     
+                   
+    //FINISHED
+    //rental hours, usage start, drink package, bartender fee, av fee, doc, flip, misc cost, misc, subtotal, sales tax, cc fee, total, deposit, final payment 
     doc.saveAndClose();
     const url = doc.getUrl();
-    sheet.getRange(index + 1, 28).setValue(url)
+    sheet.getRange(index + 1, 31).setValue(url)
      
     
   })
