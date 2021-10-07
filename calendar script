@@ -3,17 +3,22 @@ function simpleSheetsToCalendar() {
    
   // get spreadsheet 
   var ss = SpreadsheetApp.getActiveSpreadsheet(); 
-  var sheet = ss.getSheetByName('Sheet1'); 
+  var sheet = ss.getSheetByName('Form Responses 2'); 
    
   // get the data from Google Sheet 
-  var data = sheet.getRange(sheet.getLastRow(),1,1,2).getValues(); 
+  var data = sheet.getRange(sheet.getLastRow(),28,1,1).getValues(); 
+ 
   
   //  create variables 
-  var date = data[0][0]; 
-  var title = data[0][1]; 
+  //var date = data[0][27]; 
+  //var title = data[1][1]; 
  
   // get calendar 
-  var masterCal = CalendarApp.getCalendarById('ben@benlcollins.com'); 
+  var masterCal = CalendarApp.getCalendarById('c_s7fher90p6vbo2p967evvspu78@group.calendar.google.com'); 
+  
+  for (x=0; x<data.length; x++) {
+    
+    var shifts = 
    
   // add to calendar 
   masterCal.createAllDayEvent(title,date);   
