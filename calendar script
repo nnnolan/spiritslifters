@@ -1,26 +1,19 @@
-// function to retrieve data from Sheet and add to Calendar 
-function simpleSheetsToCalendar() { 
-   
-  // get spreadsheet 
-  var ss = SpreadsheetApp.getActiveSpreadsheet(); 
-  var sheet = ss.getSheetByName('Form Responses 2'); 
-   
-  // get the data from Google Sheet 
-  var data = sheet.getRange(sheet.getLastRow(),28,1,1).getValues(); 
- 
-  
-  //  create variables 
-  //var date = data[0][27]; 
-  //var title = data[1][1]; 
- 
-  // get calendar 
-  var masterCal = CalendarApp.getCalendarById('c_s7fher90p6vbo2p967evvspu78@group.calendar.google.com'); 
-  
-  for (x=0; x<data.length; x++) {
-    
-    var shifts = 
-   
-  // add to calendar 
-  masterCal.createAllDayEvent(title,date);   
-   
-} 
+//create deposit dates and final payment dates 
+function simpleSheetsToCalendar() {
+var spreadsheet = SpreadsheetApp.getActiveSheet();
+  var eventCal = CalendarApp.getCalendarById("q90tccvedk5uv0bj8ipltk8158@group.calendar.google.com");
+  var lastRow = spreadsheet.getLastRow();
+  // dont know how to give it a namevar lastRowName = spreadsheet.getRange(lastRow, 1).getValue();
+
+
+  var depositDate = spreadsheet.getRange(lastRow, 28).getValue(); //deposit date
+  var finalPaymentDate = spreadsheet.getRange(lastRow, 30).getValue(); //payment date
+
+
+
+  Logger.log(depositDate);
+  Logger.log(finalPaymentDate);
+  eventCal.createAllDayEvent('Deposit Date', depositDate);
+  eventCal.createAllDayEvent('Final Payment Date', finalPaymentDate)
+
+}
