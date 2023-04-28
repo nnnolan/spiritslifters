@@ -8,8 +8,8 @@ function onOpen() {
 
 function createNewGoogleDocs() {
   
-  const googleDocTemplate = DriveApp.getFileById('1JZkFKAfUs9LjTsoEDWoS26PP__W1Mn0bUGM_Ngi_uTg');
-  const destinationFolder = DriveApp.getFolderById('18LfHMA5g9cP4h7lRN18iQx6QDyKboEiI');
+  const googleDocTemplate = DriveApp.getFileById('(removed ;)');
+  const destinationFolder = DriveApp.getFolderById('(removed ;)');
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Form Responses 2');
   const rows = sheet.getDataRange().getValues();
   
