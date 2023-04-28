@@ -1,7 +1,7 @@
 //create deposit dates and final payment dates 
 function simpleSheetsToCalendar() {
 var spreadsheet = SpreadsheetApp.getActiveSheet();
-  var eventCal = CalendarApp.getCalendarById("q90tccvedk5uv0bj8ipltk8158@group.calendar.google.com");
+  var eventCal = CalendarApp.getCalendarById("[removed ;)]");
   var lastRow = spreadsheet.getLastRow();
   var calendarClientName = spreadsheet.getRange(lastRow, 2).getValue();
   Logger.log(calendarClientName);
